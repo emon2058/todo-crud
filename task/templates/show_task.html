@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block content%}
+<h1 class="text-center">Show Task</h1>
+<h1 class="text-center">Tasks</h1>
+{% if tasks%}
+<table class="table table-responsive mx-4 table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks%}
+        <tr>
+            <td>{{task.title}}</td>
+            <td class="text-truncate" style="max-width:250px">{{task.description}}</span></td>
+            <td>{{task.is_completed}}</td>
+            <td>
+                <a href="{% url 'delete' task.id %}"><button class="btn btn-sm btn-danger">Delete</button></a>
+                <a href="{% url 'edit' task.id %}"><button class="btn btn-sm btn-primary">Edit</button></a>
+                <button class="btn btn-sm  btn-success">Complete</button>
+            </td>
+        </tr>
+        {% endfor%}
+    </tbody>
+</table>
+{% else %}
+<h1>No Data Available</h1>
+{% endif%}
+{% endblock%}
